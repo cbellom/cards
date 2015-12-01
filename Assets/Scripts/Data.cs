@@ -3,6 +3,6 @@ using System.Collections.Generic;
 
 public class Data : MonoBehaviour {
     
-    public List<CoupleCard> cards;
+    public List<CoupleCards> listCards;
 	
 }
