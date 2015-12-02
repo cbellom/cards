@@ -8,26 +8,29 @@ public class CardController : MonoBehaviour {
     private Text cardText;
     private Image cardImage;
     private Button cardButton;
+    private MatchController matchController;
 
     void Start() {
         cardText = gameObject.GetComponentInChildren<Text>();
         cardImage = gameObject.GetComponentInChildren<Image>();
         cardButton = gameObject.GetComponentInChildren<Button>();
         cardButton.onClick.AddListener(() => HandleCardClicked());
+        matchController = GameObject.FindObjectOfType<MatchController>();
     }
 
     void HandleCardClicked()
     {
-        ShowCard();
+        SelectCard();
     }
 
-    private void ShowCard()
+    private void SelectCard()
     {
         cardText.text = card.nameCard;
         cardImage.sprite = card.imageCard;
+        matchController.SelectCard(this.gameObject);
     }
 
-    private void HideCard()
+    public void HideCard()
     {
         cardText.text = "";
         cardImage.sprite = null;
@@ -36,5 +39,10 @@ public class CardController : MonoBehaviour {
     public void SetCard(Card card)
     {
         this.card = card;
+    }
+
+    public void DisableCard() {
+        cardButton.onClick.RemoveAllListeners();
+        cardButton.gameObject.SetActive(false);
     }
 }
